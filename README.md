@@ -1,3 +1,23 @@
-## Projeto de model ToDo
+# Projeto de model ToDo
 
-Irei adicionar mais informações a este repositorio futuramente ao decorrer do projeto!!
+## Estamos criando um projeto ToDo utilizando algumas tecnologias:
+
+### Front End:
+
+- [x] React
+- [x] Html
+- [x] CSS
+- [x] JavaScript
+
+### Back End:
+
+- [x] Java
+- [x] SpringBoot
+- [x] Gradle
+- [x] MySQL
+
+
+## Funcionalidade e finalidade:
+
+
+Projeto Desenvolvido para por em prática e consolidar o uso das tecnologias citadas acima, com a finalidade de ser um front consumindo um API Rest para utilização de marcar tarefas entre outros, irei adicionar depois a parte do front e como utilizar.
