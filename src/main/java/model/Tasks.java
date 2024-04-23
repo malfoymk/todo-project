@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import lombok.Setter;
 
 @Entity
-public class Tarefas {
+public class Tasks {
 
     @Setter
     @Id
@@ -20,7 +20,7 @@ public class Tarefas {
     private boolean status;
 
 
-    public Tarefas(Long id, String nome, String descricao, boolean status) {
+    public Tasks(Long id, String nome, String descricao, boolean status) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -28,7 +28,7 @@ public class Tarefas {
     }
 
 
-    public Tarefas () {
+    public Tasks () {
 
     }
 
@@ -55,7 +55,7 @@ public class Tarefas {
         return status;
     }
 
-    public void marcarComoConcluida() {
+    public void markForComplet() {
         if (status) {
             throw new IllegalStateException("A tarefa já foi concluida anteriormente.");
         }
