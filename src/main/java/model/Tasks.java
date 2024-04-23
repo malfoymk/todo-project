@@ -15,15 +15,15 @@ public class Tasks {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private String descricao;
+    private String name;
+    private String description;
     private boolean status;
 
 
-    public Tasks(Long id, String nome, String descricao, boolean status) {
+    public Tasks(Long id, String name, String description, boolean status) {
         this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
+        this.name = name;
+        this.description = description;
         this.status = status;
     }
 
@@ -37,18 +37,18 @@ public class Tasks {
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
-    public void setNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome da tarefa não pode ser nulo ou vazio");
+    public void setNome(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("O name da tarefa não pode ser nulo ou vazio");
         }
-        this.nome = nome;
+        this.name = name;
     }
 
     public String getDescricao() {
-        return descricao;
+        return description;
     }
 
     public boolean isStatus() {
