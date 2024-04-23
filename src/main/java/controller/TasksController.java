@@ -3,7 +3,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 
-@RequestController
+@RestController
 @RequestMapping("/api/tasks")
 public class TasksController {
     
@@ -15,23 +15,23 @@ public class TasksController {
     }
 
     @GetMapping("/{id}")
-    public Tasks getTasks(@PathVariable Long id) {
+    public Tasks getTask(@PathVariable Long id) {
         return tasksService.getTasks(id);
     }
     
     @PostMapping
-    public void createTasks (@RequestBody Tasks tasks) {
+    public void createTask(@RequestBody Tasks tasks) {
         tasksService.createTasks(tasks);
     }
 
     @PutMapping("/{id}")
-    public void UpdateTasks(@PathVariable Long id, @RequestBody Tasks tasks) {
+    public void updateTask(@PathVariable Long id, @RequestBody Tasks tasks) {
         tasksService.updateTasks(id, tasks);
     }
 
 
     @DeleteMapping("/{id}")
-    public static deleteTask(@PathVariable Long id) {
+    public void deleteTask(@PathVariable Long id) {
         tasksService.deleteTask(id);
     }
 

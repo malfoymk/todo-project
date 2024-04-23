@@ -16,13 +16,29 @@ public class TasksService {
         this.tasksRepository = tasksRepository;
     }
 
-    @DeleteMapping("/tasks/{id}")
+    
     public void excluirTarefa(Long id) {
         Optional<Tasks> tasksOptional = tasksRepository.findById(id);
         if (tasksOptional.isPresent()) {
             tasksRepository.delete(tasksOptional.get());
         } else {
-            throw new RuntimeException("Tarefa não encontrada: " + id);
+            throw new TasksNotFoundException("The task with the ID " + id + " was not found.");
         }
     }
+
+
+
+
+
+
+
+
+
+// Exceção personalizada
+public class TasksNotFoundException extends RuntimeException {
+    public TasksNotFoundException(String message) {
+        super(message);
+    }
+}
+
 }
