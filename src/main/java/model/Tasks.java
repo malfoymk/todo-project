@@ -36,12 +36,12 @@ public class Tasks {
         return id;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String name) {
-        if (name == null || name.trim().isEmpty()) {
+    public void setName(String name) {
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("O name da tarefa não pode ser nulo ou vazio");
         }
         this.name = name;

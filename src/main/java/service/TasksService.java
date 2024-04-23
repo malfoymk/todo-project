@@ -9,6 +9,8 @@ import java.util.Optional;
 @Service
 public class TasksService {
 
+
+    private static final Logger logger = LoggerFactory.getLogger(TasksService.class);
     private final TasksRepository tasksRepository;
 
     @Autowired
@@ -17,10 +19,13 @@ public class TasksService {
     }
 
     public Tasks createTask(Tasks newTask) {
-        return tasksRepository.save(newTask);
+        Tasks createdTask = tasksRepository.save(newTask);
+        logger.info("Criando a tarefa com o ID: {}", createdTask.getId());
+        return createdTask;
     }
 
     public Tasks updateTask(Long id, Tasks newTask) {
+        logger.info("Atualizando as tarefas com o ID: {}", id);
         Optional<Tasks> tasksExist = tasksRepository.findById(id);
         if(tasksExist.isPresent()) {
             Tasks task = tasksExist.get();
@@ -34,6 +39,7 @@ public class TasksService {
     }
     
     public ResponseEntity<?> deleteTask(Long id) {
+        logger.info("Deletando as tarefas com o ID: {}", id);
         Optional<Tasks> tasksOptional = tasksRepository.findById(id);
         if (tasksOptional.isPresent()) {
             tasksRepository.delete(tasksOptional.get());
