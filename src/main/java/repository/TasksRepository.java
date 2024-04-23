@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TasksRepository extends JpaRepository<Tarefas, Long> {
+public interface TasksRepository extends JpaRepository<Tasks, Long> {
 
     List<Tarefas> findByStatusTrue();
 

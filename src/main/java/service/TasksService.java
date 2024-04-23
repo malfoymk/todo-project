@@ -16,6 +16,7 @@ public class TasksService {
         this.tasksRepository = tasksRepository;
     }
 
+    @DeleteMapping("/tasks/{id}")
     public void excluirTarefa(Long id) {
         Optional<Tasks> tasksOptional = tasksRepository.findById(id);
         if (tasksOptional.isPresent()) {
