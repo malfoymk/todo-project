@@ -1,7 +1,12 @@
+package me.project.todo.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import me.project.todo.service.TasksService;
+import me.project.todo.model.Tasks;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -16,19 +21,19 @@ public class TasksController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Tasks> getTasks(@PathVariable Long id) {
-        Tasks task = tasksService.getTasks(id);
+        Tasks task = tasksService.getTask(id);
         return ResponseEntity.ok().body(task);
     }
     
     @PostMapping
     public ResponseEntity<Tasks> createTask(@RequestBody Tasks tasks) {
-        Tasks createdTask = tasksService.createTasks(tasks);
+        Tasks createdTask = tasksService.createTask(tasks);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateTask(@PathVariable Long id, @RequestBody Tasks tasks) {
-        tasksService.updateTasks(id, tasks);
+        tasksService.updateTask(id, tasks);
         return ResponseEntity.noContent().build();
     }
 

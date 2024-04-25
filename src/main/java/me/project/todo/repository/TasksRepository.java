@@ -1,9 +1,10 @@
-package repository;
+package me.project.todo.repository;
 
 
-import model.Tasks;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import me.project.todo.model.Tasks;
 
 import java.util.List;
 

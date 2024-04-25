@@ -1,4 +1,4 @@
-package model;
+package me.project.todo.model;
 
 
 import jakarta.persistence.Entity;
@@ -47,7 +47,15 @@ public class Tasks {
         this.name = name;
     }
 
-    public String getDescricao() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    public String getDescription() {
         return description;
     }
 
