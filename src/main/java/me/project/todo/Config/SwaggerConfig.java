@@ -1,4 +1,6 @@
-package me.project.todo.Config;
+package me.project.todo.config;
+
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
