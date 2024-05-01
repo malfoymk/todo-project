@@ -13,6 +13,6 @@ public class CustomErrorController implements ErrorController {
     @RequestMapping(value = PATH)
     @ResponseBody
     public String error() {
-        return "Error handling";
+        return "Error 404 Not Found";
     }
 }
