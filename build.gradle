@@ -8,7 +8,7 @@ group = 'me.project'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
 configurations {
@@ -30,7 +30,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    implementation 'mysql:mysql-connector-java:8.0.27'
+    runtimeOnly 'com.h2database:h2' // Adicionando H2 como dependência de tempo de execução
     implementation 'org.hibernate:hibernate-core:5.6.0.Final'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'

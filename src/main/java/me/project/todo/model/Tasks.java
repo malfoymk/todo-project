@@ -42,7 +42,7 @@ public class Tasks {
 
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("O name da tarefa não pode ser nulo ou vazio");
+            throw new IllegalArgumentException("O nome da tarefa não pode ser nulo ou vazio");
         }
         this.name = name;
     }

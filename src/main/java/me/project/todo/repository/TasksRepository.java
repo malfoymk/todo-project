@@ -1,6 +1,5 @@
 package me.project.todo.repository;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +14,5 @@ public interface TasksRepository extends JpaRepository<Tasks, Long> {
 
     List<Tasks> findByStatusFalse();
 
-    List<Tasks> findByNomeContainingIgnoreCase(String keyword);
+    List<Tasks> findByNameContainingIgnoreCase(String keyword);
 }
