@@ -1,10 +1,9 @@
 package me.project.todo.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import lombok.Setter;
 
 @Entity
@@ -65,7 +64,7 @@ public class Tasks {
 
     public void markForComplet() {
         if (status) {
-            throw new IllegalStateException("A tarefa já foi concluida anteriormente.");
+            throw new IllegalStateException("A tarefa já foi concluída anteriormente.");
         }
         this.status = true;
     }
