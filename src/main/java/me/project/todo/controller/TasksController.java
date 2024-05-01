@@ -43,4 +43,13 @@ public class TasksController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/theme")
+    public String getTheme(@RequestHeader(value = "Mode Preference", defaultValue = "Light mode") String themePrefence) {
+        if("Dark mode".equalsIgnoreCase(themePrefence)) {
+            return "Dark mode";
+        } else {
+            return "Light mode";
+        }
+    }
+
 }
