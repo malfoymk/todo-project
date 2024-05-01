@@ -11,6 +11,7 @@ import me.project.todo.repository.TasksRepository;
 
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -72,4 +73,8 @@ public class TasksService {
     }
 
 }
+
+    public List<Tasks> getAllTasks() {
+        return tasksRepository.findAll();
+    }
 }
