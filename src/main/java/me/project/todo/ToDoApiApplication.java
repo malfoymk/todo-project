@@ -10,5 +10,3 @@ public class ToDoApiApplication {
         SpringApplication.run(ToDoApiApplication.class, args);
     }
 }
-
-    
