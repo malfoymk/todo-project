@@ -21,3 +21,6 @@
 
 
 Projeto Desenvolvido para por em prática e consolidar o uso das tecnologias citadas acima, com a finalidade de ser um front consumindo um API Rest para utilização de marcar tarefas entre outros, irei adicionar depois a parte do front e como utilizar.
+
+
+## Somente adicionar o Front!!
