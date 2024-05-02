@@ -3,16 +3,14 @@ package me.project.todo.controller;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CustomErrorController implements ErrorController {
 
-    private static final String PATH = "/error";
+    private static final String ERROR_PATH = "/error";
 
-    @RequestMapping(value = PATH)
-    @ResponseBody
+    @RequestMapping(value = ERROR_PATH)
     public String error() {
-        return "Error 404 Not Found";
+        return "error.html"; // Retorna o nome da página HTML de erro
     }
 }
