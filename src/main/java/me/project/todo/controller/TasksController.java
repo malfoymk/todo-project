@@ -11,10 +11,9 @@ import me.project.todo.model.Tasks;
 @RestController
 @RequestMapping("/api/tasks")
 public class TasksController {
-    
+
     private final TasksService tasksService;
 
-    @Autowired
     public TasksController(TasksService tasksService) {
         this.tasksService = tasksService;
     }
@@ -24,7 +23,7 @@ public class TasksController {
         Tasks task = tasksService.getTask(id);
         return ResponseEntity.ok().body(task);
     }
-    
+
     @PostMapping
     public ResponseEntity<Tasks> createTask(@RequestBody Tasks tasks) {
         Tasks createdTask = tasksService.createTask(tasks);
@@ -44,8 +43,9 @@ public class TasksController {
     }
 
     @GetMapping("/theme")
-    public String getTheme(@RequestHeader(value = "Mode Preference", defaultValue = "Light mode") String themePrefence) {
-        if("Dark mode".equalsIgnoreCase(themePrefence)) {
+    public String getTheme(
+            @RequestHeader(value = "Mode Preference", defaultValue = "Light mode") String themePrefence) {
+        if ("Dark mode".equalsIgnoreCase(themePrefence)) {
             return "Dark mode";
         } else {
             return "Light mode";
