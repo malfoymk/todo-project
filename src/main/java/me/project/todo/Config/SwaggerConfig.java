@@ -1,5 +1,4 @@
-package me.project.todo.config;
-
+package me.project.todo.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

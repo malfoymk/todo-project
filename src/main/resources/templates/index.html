@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
 
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" th:href=@"{main.css}">
     
     <title>To do!</title>
 
@@ -32,7 +32,7 @@
         <form>
 
             <input class="todo-input" type="text" placeholder="Adicione a task.">
-            <button class="todo-btn" type="submit">Vamos fazer isso!</button>
+            <button class="todo-btn" value="" type="submit">Vamos fazer isso!</button>
 
         </form>
     </div>
@@ -44,8 +44,8 @@
     </div>
 
     <div id="myUnOrdList">
-        <ul class="todo-list">
-            
+        <ul th:object="${todos}" class="todo-list">
+            <li></li>
         </ul>
     </div>
     <script src="main.js" type="text/javascript"> </script>
