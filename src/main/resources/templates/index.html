@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
-    <link rel="stylesheet" th:href="@{  /main.css}"> <!-- Referência correta para o arquivo CSS com Thymeleaf -->
+    <link rel="stylesheet" th:href="@{css/main.css}"> <!-- Referência correta para o arquivo CSS com Thymeleaf -->
     
     <title>To do!</title>
 </head>
@@ -39,6 +39,6 @@
             <li th:each="task : ${tasks}" th:text="${task.description}"></li> <!-- Use Thymeleaf para iterar sobre a lista de tarefas -->
         </ul>
     </div>
-    <script th:src="@{main.js}"></script> <!-- Referência correta para o arquivo JavaScript com Thymeleaf -->
+    <script th:src="@{js/main.js}"></script> <!-- Referência correta para o arquivo JavaScript com Thymeleaf -->
 </body>
 </html>
