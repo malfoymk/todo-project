@@ -14,7 +14,7 @@ import java.util.List;
 @Api(value="/api/tasks", tags = "Tasks")
 @RestController
 @RequestMapping("/api/tasks")
-public class TasksController {
+public class TasksController { // Change the class name to TasksController
     
     private final TasksService tasksService;
 
