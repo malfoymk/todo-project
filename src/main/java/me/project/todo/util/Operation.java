@@ -20,7 +20,6 @@ public class Operation {
         return task;
     }
 
-    // Enumeração para representar o tipo de operação
     public enum OperationType {
         CREATE, UPDATE, DELETE
     }
