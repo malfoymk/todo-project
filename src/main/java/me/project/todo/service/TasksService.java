@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 
 import me.project.todo.model.Tasks;
 import me.project.todo.repository.TasksRepository;
+import me.project.todo.util.Operation.OperationType;
+import me.project.todo.util.Operation;
 
 import org.springframework.http.HttpStatus;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +24,8 @@ public class TasksService {
     private static final Logger logger = LoggerFactory.getLogger(TasksService.class);
 
     private final TasksRepository tasksRepository;
+    
+    private final Deque<Operation> operationHistory = new LinkedList<>();
 
     @Autowired
     public TasksService(TasksRepository tasksRepository) {
@@ -38,6 +44,7 @@ public class TasksService {
     public Tasks createTask(Tasks newTask) {
         Tasks createdTask = tasksRepository.save(newTask);
         logger.info("Criando a tarefa com o ID: {}", createdTask.getId());
+        operationHistory.push(new Operation(OperationType.CREATE, createdTask));
         return createdTask;
     }
 
@@ -49,6 +56,7 @@ public class TasksService {
             task.setName(newTask.getName());
             task.setDescription(newTask.getDescription());
             task.setStatus(newTask.isStatus());
+            operationHistory.push(new Operation(OperationType.UPDATE, task));
             return tasksRepository.save(task);
         } else {
             throw new TasksNotFoundException("Task not found: " + id);
@@ -60,6 +68,7 @@ public class TasksService {
         Optional<Tasks> tasksOptional = tasksRepository.findById(id);
         if (tasksOptional.isPresent()) {
             tasksRepository.delete(tasksOptional.get());
+            operationHistory.push(new Operation(OperationType.DELETE, tasksOptional.get()));
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -67,12 +76,32 @@ public class TasksService {
         }
     }
 
-    public class TasksNotFoundException extends RuntimeException {
-    public TasksNotFoundException(String message) {
-        super(message);
+    public boolean undoLastOperation() {
+        if(!operationHistory.isEmpty()) {
+            Operation lastOperation = operationHistory.pop();
+            switch (lastOperation.getType()) {
+                case CREATE:
+                    tasksRepository.delete(lastOperation.getTask());
+                    break;
+                case UPDATE:
+                    tasksRepository.save(lastOperation.getTask());
+                    break;
+                case DELETE:
+                    tasksRepository.save(lastOperation.getTask());
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        }
+        return false;
     }
 
-}
+    public class TasksNotFoundException extends RuntimeException {
+        public TasksNotFoundException(String message) {
+            super(message);
+        }
+    }
 
     public List<Tasks> getAllTasks() {
         return tasksRepository.findAll();

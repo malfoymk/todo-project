@@ -61,4 +61,15 @@ public class TasksController { // Change the class name to TasksController
             return "Light mode";
         }
     }
+    @GetMapping("/undo")
+        public ResponseEntity<Void> undolastOperation() {
+            boolean sucess = tasksService.undoLastOperation();
+            if (sucess) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }
+
+
