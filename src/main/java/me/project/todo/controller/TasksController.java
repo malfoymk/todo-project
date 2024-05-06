@@ -11,7 +11,7 @@ import me.project.todo.model.Tasks;
 
 import java.util.List;
 
-@Api(value="/api/tasks", tags = "End Points Tasks")
+@Api(value="/api/tasks", tags = "1.End Points Tasks")
 @RestController
 @RequestMapping("/api/tasks")
 public class TasksController { // Change the class name to TasksController

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import io.swagger.annotations.Api;
 
-@Api(tags = "End Points Web Page")
+@Api(tags = "2.End Points Web Page")
 @Controller
 public class WebPageController {
 
