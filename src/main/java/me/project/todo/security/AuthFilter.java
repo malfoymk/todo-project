@@ -30,8 +30,9 @@ public class AuthFilter extends OncePerRequestFilter {
         //TODO Auto-generated constructor stub
     }
 
+    @SuppressWarnings("null")
     @Override
-    protected void doFilterInternal(@SuppressWarnings("null") HttpServletRequest request, @SuppressWarnings("null") HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
             String token = jwtTokenProvider.resolveToken(request);
