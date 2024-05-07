@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import me.project.todo.model.User;
 import me.project.todo.service.CustomUserDetailsService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class AuthController {
+public class AuthController<JwtTokenUtil> {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -30,19 +31,20 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @SuppressWarnings("unused")
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody User user) {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
+                        user.getUsername(),
+                        user.getPassword()
                 )
         );
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         Map<String, String> response = new HashMap<>();
         response.put("token", token);

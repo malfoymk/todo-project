@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll() // Permitir acesso ao endpoint de login sem autenticação
                 .anyRequest().authenticated()
             .and()
-            .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new AuthFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
