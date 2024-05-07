@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.project.todo.repository.CustomUserDetailsService;
+import me.project.todo.service.CustomUserDetailsService;
 
 import java.util.HashMap;
 import java.util.Map;

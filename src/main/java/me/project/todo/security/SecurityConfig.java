@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import me.project.todo.repository.CustomUserDetailsService;
+import me.project.todo.service.CustomUserDetailsService;
 
 @SuppressWarnings("deprecation")
 @EnableWebSecurity
