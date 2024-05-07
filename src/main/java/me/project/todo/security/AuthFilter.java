@@ -27,7 +27,6 @@ public class AuthFilter extends OncePerRequestFilter {
 
     public AuthFilter() {
         this.jwtTokenProvider = new TokenProvider();
-        //TODO Auto-generated constructor stub
     }
 
     @SuppressWarnings("null")
