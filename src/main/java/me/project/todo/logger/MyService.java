@@ -1,4 +1,4 @@
-package me.project.todo.loggin;
+package me.project.todo.logger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
