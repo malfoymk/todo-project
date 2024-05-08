@@ -1,11 +1,14 @@
 package me.project.todo.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,20 +32,20 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @SuppressWarnings("unused")
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        user.getPassword()
-                )
-        );
+    public ResponseEntity<?> login(@Validated @RequestBody User user) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getUsername(),
+                            user.getPassword()
+                    )
+            );
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect username or password");
+        }
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         Map<String, String> response = new HashMap<>();
         response.put("token", token);
