@@ -19,6 +19,7 @@ public class JwtTokenUtil {
     @Value("${jwt.expiration}")
     private Long expiration;
 
+    @SuppressWarnings("deprecation")
     public String generateToken(UserDetails userDetails) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
