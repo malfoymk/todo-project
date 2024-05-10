@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.project.todo.model.User;
+import me.project.todo.model.Account;
 import me.project.todo.security.JwtTokenUtil;
 import me.project.todo.service.CustomUserDetailsService;
 
@@ -33,7 +33,7 @@ public class LoginController {
     private CustomUserDetailsService userDetailsService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Validated @RequestBody User user) {
+    public ResponseEntity<?> login(@Validated @RequestBody Account user) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import lombok.Setter;
 
 @Entity
-public class User {
+public class Account {
 
     @Setter
     @Id
@@ -17,13 +17,13 @@ public class User {
     private String username;
     private String password;
 
-    public User(Long id, String username, String password) {
+    public Account(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
     
-    public User() {
+    public Account() {
         
     }
 
