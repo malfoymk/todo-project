@@ -14,7 +14,10 @@
 - [x] Java
 - [x] SpringBoot
 - [x] Gradle
-- [x] MySQL
+- [x] Lombok
+- [x] SpringFox
+- [x] H2 Database
+- [x] JSON Web Token
 - [x] Swagger
 
 
