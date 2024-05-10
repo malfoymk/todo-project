@@ -10,7 +10,11 @@ import org.springframework.stereotype.Component;
 public class TokenProvider {
 
     public String resolveToken(HttpServletRequest request) {
-        throw new UnsupportedOperationException("Unimplemented method 'resolveToken'");
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 
     public boolean validateToken(String token) {
