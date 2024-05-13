@@ -16,11 +16,15 @@ public class Account {
 
     private String username;
     private String password;
+    private Object email;
 
-    public Account(Long id, String username, String password) {
+
+
+    public Account(Long id, String username, String password, Object email) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.email = email;
     }
     
     public Account() {
@@ -50,5 +54,15 @@ public class Account {
         return password;
     }
 
+    public Object getEmail() {
+        throw new UnsupportedOperationException("O email já está cadastrado");
+    }
+
+    public void setEmail(Object email) {
+        if (email == null || email.toString().isEmpty()) {
+            throw new IllegalArgumentException("O email não pode ser nulo ou vazio");
+        }
+        this.email = email;
+    }
     
 }

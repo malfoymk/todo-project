@@ -24,4 +24,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
+
+    public void save(Account user) {
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
+
+    public boolean existbyUsername(String username) {
+        throw new UnsupportedOperationException("Unimplemented method 'existbyUsername'");
+    }
+
+    public boolean existByEmail(Object email) {
+        throw new UnsupportedOperationException("Unimplemented method 'existByEmail'");
+    }
 }
