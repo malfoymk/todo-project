@@ -54,23 +54,23 @@ public class AccountController {
     }
 
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Validated @RequestBody Account user) {
-        if (userDetailsService.existbyUsername(user.getUsername())) {
-            return ResponseEntity.badRequest().body("Username already exists");
-        }
+    // @PostMapping("/register")
+    // public ResponseEntity<?> register(@Validated @RequestBody Account user) {
+    //     if (userDetailsService.existbyUsername(user.getUsername())) {
+    //         return ResponseEntity.badRequest().body("Username already exists");
+    //     }
 
-        if (userDetailsService.existByEmail(user.getEmail())) {
-            return ResponseEntity.badRequest().body("Email already exists");
-        }
+    //     if (userDetailsService.existByEmail(user.getEmail())) {
+    //         return ResponseEntity.badRequest().body("Email already exists");
+    //     }
 
-        Account account = new Account();
-        account.setUsername(account.getUsername());
-        account.setEmail(account.getEmail());
-        account.setPassword(account.getPassword());
+    //     Account account = new Account();
+    //     account.setUsername(account.getUsername());
+    //     account.setEmail(account.getEmail());
+    //     account.setPassword(account.getPassword());
 
-        userDetailsService.save(account);
+    //     userDetailsService.save(account);
 
-        return ResponseEntity.ok("User registered successfully");
-    }
+    //     return ResponseEntity.ok("User registered successfully");
+    // }
 }

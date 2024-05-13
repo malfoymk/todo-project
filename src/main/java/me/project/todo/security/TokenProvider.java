@@ -19,12 +19,12 @@ public class TokenProvider {
 
     public boolean validateToken(String token) { // Validate token
         throw new UnsupportedOperationException("Unimplemented method 'validateToken'");
-        boolean isValid = request.getAuthentication().isAuthenticated();
-        if (!isValid) {
-            throw new RuntimeException("Invalid token");
-        }
-        return isValid;
-    }
+        //  boolean isValid = request.getAuthentication().isAuthenticated();
+        //  if (!isValid) {
+        //      throw new RuntimeException("Invalid token");
+        //  }
+        //  return isValid;
+     }
 
     public Authentication getAuthentication(String token) { // Get authentication from token
         throw new UnsupportedOperationException("Unimplemented method 'getAuthentication'");
