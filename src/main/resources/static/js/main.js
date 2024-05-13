@@ -58,6 +58,7 @@ async function addToDo(event) {
 function createToDoElement(task) {
     const toDoDiv = document.createElement("div");
     toDoDiv.classList.add('todo', `${savedTheme}-todo`);
+    toDoDiv.dataset.taskId = task.id;
 
     const newToDo = document.createElement('li');
     newToDo.innerText = task.name;
