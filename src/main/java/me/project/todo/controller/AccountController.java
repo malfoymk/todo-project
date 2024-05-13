@@ -20,7 +20,7 @@ import me.project.todo.service.CustomUserDetailsService;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Api(tags = "4.End Points Accounts")
 @RestController
 public class AccountController {
 
