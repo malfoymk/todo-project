@@ -1,101 +1,98 @@
-const toDoInput = document.querySelector('.todo-input');
-const toDoBtn = document.querySelector('.todo-btn');
-const toDoList = document.querySelector('.todo-list');
-const lightTheme = document.querySelector('.light-theme');
-const darkerTheme = document.querySelector('.darker-theme');
+document.addEventListener('DOMContentLoaded', () => {
+    const toDoInput = document.querySelector('.todo-input');
+    const toDoBtn = document.querySelector('.todo-btn');
+    const toDoList = document.querySelector('#myUnOrdList ul');
+    const lightTheme = document.querySelector('.light-theme');
+    const darkerTheme = document.querySelector('.darker-theme');
 
-toDoBtn.addEventListener('click', addToDo);
-toDoList.addEventListener('click', deletecheck);
-document.addEventListener("DOMContentLoaded", getTodos);
-lightTheme.addEventListener('click', () => changeTheme('light'));
-darkerTheme.addEventListener('click', () => changeTheme('darker'));
-
-let savedTheme = localStorage.getItem('savedTheme');
-savedTheme === null ?
-    changeTheme('standard')
-    : changeTheme(localStorage.getItem('savedTheme'));
-
-async function addToDo(event) {
-    event.preventDefault();
-
-    const todoName = toDoInput.value;
-
-    if (todoName === '') {
-        alert("Você deve escrever algo!");
-        return;
+    if (toDoBtn) {
+        toDoBtn.addEventListener('click', addToDo);
     }
 
-    const todoData = {
-        name: todoName,
-        description: '',
-        status: false
-    };
+    if (lightTheme) {
+        lightTheme.addEventListener('click', () => changeTheme('light'));
+    }
 
-    try {
-        const response = await fetch('/api/tasks', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(todoData)
-        });
+    if (darkerTheme) {
+        darkerTheme.addEventListener('click', () => changeTheme('darker'));
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const toDoBtn = document.querySelector('.todo-btn');
+        if (toDoBtn) {
+            toDoBtn.addEventListener('click', addToDo);
+        }
+    });
+    
+    function addToDo(event) {
+        event.preventDefault();
+        // Resto da função addToDo
+    }
+    
+    async function addToDo(event) {
+        event.preventDefault();
 
-        if (!response.ok) {
-            throw new Error('Erro ao adicionar a tarefa');
+        const todoName = toDoInput.value;
+
+        if (todoName === '') {
+            alert("Você deve escrever algo!");
+            return;
         }
 
-        const createdTask = await response.json();
+        const todoData = {
+            description: todoName
+        };
 
-        const toDoDiv = createToDoElement(createdTask);
-        toDoList.appendChild(toDoDiv);
+        try {
+            const response = await fetch('/api/tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(todoData)
+            });
 
-        toDoInput.value = '';
-    } catch (error) {
-        console.error('Erro ao adicionar a tarefa:', error.message);
+            if (!response.ok) {
+                throw new Error('Erro ao adicionar a tarefa');
+            }
+
+            const createdTask = await response.json();
+            const newToDo = document.createElement('li');
+            newToDo.textContent = createdTask.description;
+            toDoList.appendChild(newToDo);
+            toDoInput.value = '';
+        } catch (error) {
+            console.error('Erro ao adicionar a tarefa:', error.message);
+        }
     }
-}
 
-function createToDoElement(task) {
-    const toDoDiv = document.createElement("div");
-    toDoDiv.classList.add('todo', `${savedTheme}-todo`);
-    toDoDiv.dataset.taskId = task.id;
-
-    const newToDo = document.createElement('li');
-    newToDo.innerText = task.name;
-    newToDo.classList.add('todo-item');
-    toDoDiv.appendChild(newToDo);
-
-    const checked = document.createElement('button');
-    checked.innerHTML = '<i class="fas fa-check"></i>';
-    checked.classList.add('check-btn', `${savedTheme}-button`);
-    toDoDiv.appendChild(checked);
-
-    const deleted = document.createElement('button');
-    deleted.innerHTML = '<i class="fas fa-trash"></i>';
-    deleted.classList.add('delete-btn', `${savedTheme}-button`);
-    toDoDiv.appendChild(deleted);
-
-    return toDoDiv;
-}
-
-async function getTodos() {
-    try {
-        const response = await fetch('/api/tasks');
-        const tasks = await response.json();
-
-        tasks.forEach(task => {
-            const toDoDiv = createToDoElement(task);
-            toDoList.appendChild(toDoDiv);
-        });
-    } catch (error) {
-        console.error('Erro ao buscar tarefas:', error.message);
+    async function getTodos() {
+        try {
+            const response = await fetch('/api/tasks');
+            if (!response.ok) {
+                throw new Error('Erro ao buscar tarefas');
+            }
+            const tasks = await response.json();
+            tasks.forEach(task => {
+                const newToDo = document.createElement('li');
+                newToDo.textContent = task.description;
+                toDoList.appendChild(newToDo);
+            });
+        } catch (error) {
+            console.error('Erro ao buscar tarefas:', error.message);
+        }
     }
-}
 
-async function deletecheck(event) {
+    function changeTheme(color) {
+        document.body.className = color;
+    }
+
+    // Chamar a função para obter as tarefas quando a página for carregada
+    getTodos();
+});
+async function deleteCheck(event) {
     const item = event.target;
 
-    if (item.classList[0] === 'delete-btn') {
+    if (item.classList.contains('delete-btn')) {
         const todoDiv = item.parentElement;
         const taskId = todoDiv.dataset.taskId;
 
@@ -114,7 +111,7 @@ async function deletecheck(event) {
         }
     }
 
-    if (item.classList[0] === 'check-btn') {
+    if (item.classList.contains('check-btn')) {
         const todoDiv = item.parentElement;
         todoDiv.classList.toggle("completed");
     }
@@ -126,27 +123,30 @@ function changeTheme(color) {
 
     document.body.className = color;
 
-    color === 'darker' ? 
-        document.getElementById('title').classList.add('darker-title')
-        : document.getElementById('title').classList.remove('darker-title');
+    const title = document.getElementById('title');
+    if (color === 'darker') {
+        title.classList.add('darker-title');
+    } else {
+        title.classList.remove('darker-title');
+    }
 
     document.querySelector('input').className = `${color}-input`;
 
     document.querySelectorAll('.todo').forEach(todo => {
-        Array.from(todo.classList).some(item => item === 'completed') ? 
-            todo.className = `todo ${color}-todo completed`
-            : todo.className = `todo ${color}-todo`;
+        if (todo.classList.contains('completed')) {
+            todo.className = `todo ${color}-todo completed`;
+        } else {
+            todo.className = `todo ${color}-todo`;
+        }
     });
 
     document.querySelectorAll('button').forEach(button => {
-        Array.from(button.classList).some(item => {
-            if (item === 'check-btn') { 
-                button.className = `check-btn ${color}-button`;  
-            } else if (item === 'delete-btn') {
-                button.className = `delete-btn ${color}-button`; 
-            } else if (item === 'todo-btn') {
-                button.className = `todo-btn ${color}-button`;
-            }
-        });
+        if (button.classList.contains('check-btn')) {
+            button.className = `check-btn ${color}-button`;
+        } else if (button.classList.contains('delete-btn')) {
+            button.className = `delete-btn ${color}-button`;
+        } else if (button.classList.contains('todo-btn')) {
+            button.className = `todo-btn ${color}-button`;
+        }
     });
 }

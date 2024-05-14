@@ -35,8 +35,8 @@
     </div>
 
     <div id="myUnOrdList">
-        <ul>
-            <li th:each="task : ${tasks}" th:text="${task.description}"></li> <!-- Use Thymeleaf para iterar sobre a lista de tarefas -->
+        <ul class="todo-list">
+            <li th:each="task : ${tasks}" th:text="${task.description}"></li>
         </ul>
     </div>
     <script th:src="@{js/main.js}"></script> <!-- Referência correta para o arquivo JavaScript com Thymeleaf -->
