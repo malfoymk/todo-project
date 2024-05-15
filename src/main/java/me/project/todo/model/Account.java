@@ -1,5 +1,6 @@
 package me.project.todo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,15 +17,17 @@ public class Account {
 
     private String username;
     private String password;
-    // private Object email;
+    
+        @Column(name = "email", unique = true, nullable = false)
+        private String email;
 
 
 
-    public Account(Long id, String username, String password /*Object email*/) {
+    public Account(Long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
-        // this.email = email;
+        this.email = email;
     }
     
     public Account() {
@@ -54,15 +57,15 @@ public class Account {
         return password;
     }
 
-    // public Object getEmail() {
-    //     throw new UnsupportedOperationException("O email já está cadastrado");
-    // }
+     public String getEmail() {
+         throw new UnsupportedOperationException("O email já está cadastrado");
+     }
 
-    // public void setEmail(Object email) {
-    //     if (email == null || email.toString().isEmpty()) {
-    //         throw new IllegalArgumentException("O email não pode ser nulo ou vazio");
-    //     }
-    //     this.email = email;
-    // }
+     public void setEmail(String email) {
+         if (email == null || email.toString().isEmpty()) {
+             throw new IllegalArgumentException("O email não pode ser nulo ou vazio");
+         }
+         this.email = email;
+     }
     
 }

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 @Api(tags = "4.End Points Accounts")
 @RestController
+@RequestMapping("/api/accounts")
 public class AccountController {
 
     @Autowired
@@ -54,23 +56,23 @@ public class AccountController {
     }
 
 
-    // @PostMapping("/register")
-    // public ResponseEntity<?> register(@Validated @RequestBody Account user) {
-    //     if (userDetailsService.existbyUsername(user.getUsername())) {
-    //         return ResponseEntity.badRequest().body("Username already exists");
-    //     }
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Validated @RequestBody Account user) {
+        if (userDetailsService.existbyUsername(user.getUsername())) {
+            return ResponseEntity.badRequest().body("Username already exists");
+        }
 
-    //     if (userDetailsService.existByEmail(user.getEmail())) {
-    //         return ResponseEntity.badRequest().body("Email already exists");
-    //     }
+        if (userDetailsService.existByEmail(user.getEmail())) {
+            return ResponseEntity.badRequest().body("Email already exists");
+        }
 
-    //     Account account = new Account();
-    //     account.setUsername(account.getUsername());
-    //     account.setEmail(account.getEmail());
-    //     account.setPassword(account.getPassword());
+        Account account = new Account();
+        account.setUsername(account.getUsername());
+        account.setEmail(account.getEmail());
+        account.setPassword(account.getPassword());
 
-    //     userDetailsService.save(account);
+        userDetailsService.save(account);
 
-    //     return ResponseEntity.ok("User registered successfully");
-    // }
+        return ResponseEntity.ok("User registered successfully");
+    }
 }

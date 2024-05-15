@@ -14,16 +14,16 @@ import java.util.Date;
 public class JwtTokenUtil {
 
     @Value("${jwt.secret}")
-    private String secret;
+    private String secretKey;
 
     @Value("${jwt.expiration}")
     private Long expiration;
-
+    
     public String generateToken(UserDetails userDetails) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
 
-        SecretKey key = Keys.hmacShaKeyFor(secret.getBytes()); // Create a key from the secret  
+        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes()); // Create a key from the secret  
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
