@@ -21,7 +21,7 @@ import io.swagger.annotations.Api;
             model.addAttribute("nomeDoAtributo", "Valor do Atributo");
             return "login.html"; // Retorna o nome do arquivo HTML sem extensão
         }
-        @PostMapping("/register")
+        @PostMapping("/sign-up")
         public String register(Model model) {
             model.addAttribute("nomeDoAtributo", "Valor do Atributo");
             return "register.html"; // Retorna o nome do arquivo HTML sem extensão
