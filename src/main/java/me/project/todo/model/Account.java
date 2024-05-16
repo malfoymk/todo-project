@@ -50,8 +50,15 @@ public class Account {
     }
 
     public void setPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("A senha não pode ser nula ou vazia");
+        }
+        if (!password.matches(".*[@!#&*%$].*")) {
+            throw new IllegalArgumentException("A senha deve conter pelo menos um dos seguintes caracteres especiais: '@', '!', '#', '&', '*', '%', '$'");
+        }
         this.password = password;
     }
+    
 
     public String getPassword() {
         return password;
@@ -65,6 +72,9 @@ public class Account {
          if (email == null || email.toString().isEmpty()) {
              throw new IllegalArgumentException("O email não pode ser nulo ou vazio");
          }
+         if (!email.contains("@")) {
+            throw new IllegalArgumentException("O email não é válido");
+        }
          this.email = email;
      }
     
