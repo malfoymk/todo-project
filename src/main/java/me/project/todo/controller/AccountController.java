@@ -9,8 +9,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -22,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 @Api(tags = "4.End Points Accounts")
 @RestController
+@RequestMapping("/api/accounts")
 public class AccountController {
 
     @Autowired
@@ -33,7 +36,7 @@ public class AccountController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ResponseEntity<?> login(@Validated @RequestBody Account user) {
         try {
             authenticationManager.authenticate(

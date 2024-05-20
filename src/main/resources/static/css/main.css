@@ -238,7 +238,8 @@ form button {
     background-color: #01394c;
 }
 
-.todo li{
+.todo-list li{
+    background-color:#f0f0f0 ;
     padding: 7px;
     word-wrap: break-word; 
     flex-wrap: wrap; 

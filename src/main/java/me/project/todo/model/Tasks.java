@@ -9,6 +9,7 @@ import lombok.Setter;
 @Entity
 public class Tasks {
 
+    
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

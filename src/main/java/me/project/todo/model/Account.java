@@ -1,5 +1,6 @@
 package me.project.todo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +17,13 @@ public class Account {
 
     private String username;
     private String password;
-    private Object email;
+    
+        @Column(name = "email", unique = true, nullable = false)
+        private String email;
 
 
 
-    public Account(Long id, String username, String password, Object email) {
+    public Account(Long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -47,22 +50,32 @@ public class Account {
     }
 
     public void setPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("A senha não pode ser nula ou vazia");
+        }
+        if (!password.matches(".*[@!#&*%$].*")) {
+            throw new IllegalArgumentException("A senha deve conter pelo menos um dos seguintes caracteres especiais: '@', '!', '#', '&', '*', '%', '$'");
+        }
         this.password = password;
     }
+    
 
     public String getPassword() {
         return password;
     }
 
-    public Object getEmail() {
-        throw new UnsupportedOperationException("O email já está cadastrado");
-    }
+     public String getEmail() {
+         throw new UnsupportedOperationException("O email já está cadastrado");
+     }
 
-    public void setEmail(Object email) {
-        if (email == null || email.toString().isEmpty()) {
-            throw new IllegalArgumentException("O email não pode ser nulo ou vazio");
+     public void setEmail(String email) {
+         if (email == null || email.toString().isEmpty()) {
+             throw new IllegalArgumentException("O email não pode ser nulo ou vazio");
+         }
+         if (!email.contains("@")) {
+            throw new IllegalArgumentException("O email não é válido");
         }
-        this.email = email;
-    }
+         this.email = email;
+     }
     
 }
