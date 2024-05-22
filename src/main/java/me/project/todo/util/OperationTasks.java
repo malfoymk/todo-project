@@ -2,12 +2,12 @@ package me.project.todo.util;
 
 import me.project.todo.model.Tasks;
 
-public class Operation {
+public class OperationTasks {
 
     private final OperationType type;
     private final Tasks task;
 
-    public Operation(OperationType type, Tasks task) {
+    public OperationTasks(OperationType type, Tasks task) {
         this.type = type;
         this.task = task;
     }

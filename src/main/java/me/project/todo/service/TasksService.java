@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import me.project.todo.model.Tasks;
 import me.project.todo.repository.TasksRepository;
-import me.project.todo.util.Operation.OperationType;
-import me.project.todo.util.Operation;
+import me.project.todo.util.OperationTasks.OperationType;
+import me.project.todo.util.OperationTasks;
 
 import org.springframework.http.HttpStatus;
 
@@ -25,7 +25,7 @@ public class TasksService {
 
     private final TasksRepository tasksRepository;
     
-    private final Deque<Operation> operationHistory = new LinkedList<>();
+    private final Deque<OperationTasks> operationHistory = new LinkedList<>();
 
     @Autowired
     public TasksService(TasksRepository tasksRepository) {
@@ -44,7 +44,7 @@ public class TasksService {
     public Tasks createTask(Tasks newTask) {
         Tasks createdTask = tasksRepository.save(newTask);
         logger.info("Criando a tarefa com o ID: {}", createdTask.getId());
-        operationHistory.push(new Operation(OperationType.CREATE, createdTask));
+        operationHistory.push(new OperationTasks(OperationType.CREATE, createdTask));
         return createdTask;
     }
 
@@ -56,7 +56,7 @@ public class TasksService {
             task.setName(newTask.getName());
             task.setDescription(newTask.getDescription());
             task.setStatus(newTask.isStatus());
-            operationHistory.push(new Operation(OperationType.UPDATE, task));
+            operationHistory.push(new OperationTasks(OperationType.UPDATE, task));
             return tasksRepository.save(task);
         } else {
             throw new TasksNotFoundException("Task not found: " + id);
@@ -68,7 +68,7 @@ public class TasksService {
         Optional<Tasks> tasksOptional = tasksRepository.findById(id);
         if (tasksOptional.isPresent()) {
             tasksRepository.delete(tasksOptional.get());
-            operationHistory.push(new Operation(OperationType.DELETE, tasksOptional.get()));
+            operationHistory.push(new OperationTasks(OperationType.DELETE, tasksOptional.get()));
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -78,7 +78,7 @@ public class TasksService {
 
     public boolean undoLastOperation() {
         if(!operationHistory.isEmpty()) {
-            Operation lastOperation = operationHistory.pop();
+            OperationTasks lastOperation = operationHistory.pop();
             switch (lastOperation.getType()) {
                 case CREATE:
                     tasksRepository.delete(lastOperation.getTask());

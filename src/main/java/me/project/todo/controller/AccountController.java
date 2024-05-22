@@ -72,7 +72,7 @@ public class AccountController {
         account.setEmail(account.getEmail());
         account.setPassword(account.getPassword());
 
-        userDetailsService.save(account);
+        userDetailsService.createdUser(account);
 
         return ResponseEntity.ok("User registered successfully");
     }
