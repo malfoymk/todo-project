@@ -42,7 +42,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     public boolean existbyUsername(String username) {
-        throw new UnsupportedOperationException("Unimplemented method 'existbyUsername'");
+        Account user = userRepository.findByUsername(username);
+        if (user != null) {
+            throw new UsernameNotFoundException("User already exists with username: " + username);
+        }
+        return false;
     }
 
     public boolean existByEmail(Object email) {

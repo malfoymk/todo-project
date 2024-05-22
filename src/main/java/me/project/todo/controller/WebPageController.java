@@ -14,16 +14,16 @@ import io.swagger.annotations.Api;
         @GetMapping("/home")
         public String index(Model model) {
             model.addAttribute("nomeDoAtributo", "Valor do Atributo");
-            return "index.html"; // Retorna o nome do arquivo HTML sem extensão
+            return "index.html"; // Retorna o nome do arquivo HTML 
         }
         @GetMapping("/login")
         public String login(Model model) {
             model.addAttribute("nomeDoAtributo", "Valor do Atributo");
-            return "login.html"; // Retorna o nome do arquivo HTML sem extensão
+            return "login.html"; // Retorna o nome do arquivo HTML 
         }
         @PostMapping("/sign-up")
         public String register(Model model) {
             model.addAttribute("nomeDoAtributo", "Valor do Atributo");
-            return "register.html"; // Retorna o nome do arquivo HTML sem extensão
+            return "register.html"; // Retorna o nome do arquivo HTML 
         }
     }
