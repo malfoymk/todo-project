@@ -62,7 +62,7 @@ public class TasksController { // Change the class name to TasksController
         }
     }
     @GetMapping("/undo")
-        public ResponseEntity<Void> undolastOperation() {
+        public ResponseEntity<Void> undoLastOperation() {
             boolean sucess = tasksService.undoLastOperation();
             if (sucess) {
                 return ResponseEntity.noContent().build();
