@@ -23,7 +23,7 @@ body {
 
 .darker {
     background-image: linear-gradient(100deg, #001214, #001f29);
-    color: #001214;
+    color: #ffffff;
     transition: 0.3s linear;
 }
 
@@ -235,19 +235,32 @@ form button {
 }
 
 .darker-todo {
-    background-color: #01394c;
+    background-color: #EBF7FA;
 }
 
-.todo-list li{
-    background-color:#f0f0f0 ;
+
+.todo-list li.light-li {
+    background-color: #f0f0f0;
+    color: white;
+}
+
+
+.todo-list li.darker-li {
+    background-color: #EBF7FA;
+    color: black;
+}
+
+
+.todo-list li {
     padding: 7px;
-    word-wrap: break-word; 
-    flex-wrap: wrap; 
+    word-wrap: break-word;
+    flex-wrap: wrap;
     font-size: 20px;
-    flex: 1; 
+    flex: 1;
     border-radius: 30px;
     overflow-wrap: anywhere;
 }
+
 
 .check-btn, .delete-btn {
     font-size: 19px;

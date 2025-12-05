@@ -149,4 +149,10 @@ function changeTheme(color) {
             button.className = `todo-btn ${color}-button`;
         }
     });
+
+    // 🔥 Atualiza os LI ao trocar o tema!
+    document.querySelectorAll('#myUnOrdList li').forEach(li => {
+        li.classList.remove('light-li', 'darker-li');
+        li.classList.add(`${color}-li`);
+    });
 }
